@@ -1,0 +1,5 @@
+.content-wrapper {
+  min-height: calc(100vh - 64px);
+  background-color: #f8fafc;
+  padding-bottom: 2rem;
+}

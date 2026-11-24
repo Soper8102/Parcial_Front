@@ -1,0 +1,38 @@
+<div class="view-wrapper">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <div class="header-titles">
+        <mat-card-title>Materias Vistas Este Semestre</mat-card-title>
+        <mat-card-subtitle>Carrera: Ingeniería de Sistemas - Base de datos PostgreSQL (parcial_db)</mat-card-subtitle>
+      </div>
+      <button mat-flat-button color="primary" (click)="cargarMaterias()" [disabled]="cargando()">
+        <mat-icon>refresh</mat-icon>
+        Actualizar
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (cargando()) {
+        <div class="state-container">
+          <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+          <p>Consultando backend y PostgreSQL...</p>
+        </div>
+      } @else if (error()) {
+        <div class="error-container">
+          <mat-icon color="warn">warning</mat-icon>
+          <div class="error-text">
+            <strong>Servidor Backend no detectado en el puerto 3000</strong>
+            <p>{{ error() }}</p>
+            <small>Para iniciarlo, ejecuta en una terminal: <code>cd Parcial_Backend ; npm.cmd run dev</code></small>
+          </div>
+          <div class="error-actions">
+            <button mat-raised-button color="primary" (click)="cargarMaterias()">Reintentar</button>
+            <button mat-stroked-button (click)="cargarDatosLocales()">Ver datos de prueba</button>
+          </div>
+        </div>
+      } @else {
+        <app-table [data]="materias()"></app-table>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>
